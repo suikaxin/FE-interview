@@ -17,7 +17,8 @@ css命名的语义化是指：为html标签添加有意义的class，id补充未
 
 <br />
 
-- **如何进行网站性能优化**
+- **如何进行网站性能优化**  
+[雅虎Best Practices for Speeding Up Your Web Site](https://developer.yahoo.com/performance/rules.html)
     - content方面
         1. 减少HTTP请求：合并文件、CSS精灵、inline Image
         2. 减少DNS查询：DNS查询完成之前浏览器不能从这个主机下载任何任何文件。方法：DNS缓存、将资源分布到恰当数量的主机名，平衡并行下载和DNS查询
@@ -36,7 +37,7 @@ css命名的语义化是指：为html标签添加有意义的class，id补充未
         4. 配置ETag
         5. Flush Buffer Early
         6. Ajax使用GET进行请求
-        7. **避免空src的img标签**
+        7. 避免空src的img标签
     - Cookie方面
         1. 减小cookie大小
         2. 引入资源的域名不要包含cookie
@@ -64,4 +65,22 @@ css命名的语义化是指：为html标签添加有意义的class，id补充未
 <br />
 
 - **什么是FOUC？如何避免？**  
-Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默认样式显示文档，用户样式加载渲染之后再从新显示文档，造成页面闪烁。**解决方法**：把样式表放到文档的`head`
+Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默认样式显示文档，用户样式加载渲染之后再从新显示文档，造成页面闪烁。**解决方法**：把样式表放到文档的`head`  
+
+<br />
+## CSS部分
+- **CSS有哪些继承属性**
+    - 关于文字排版的属性如：`font`, `word-break`, `letter-spacing`,`text-align`,`tex--rendering`,`word-spacing`,`white-spacing`,`text-indent`,`text-transform`,`text-shadow`
+    - `line-height`
+    - `color`
+
+
+<br />
+
+## javascript部分
+- **javascript有哪几种方法定义函数？**
+    1. [函数声明表达式](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)
+    2. [function操作符](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function)
+    3. [Function 构造函数](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function)
+
+- 
