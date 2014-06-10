@@ -91,7 +91,7 @@ Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默�
 
     function flat(data, result) {
         var i, d, len;
-        for (i = 0, len = data.length; i < len; ++i) {
+        for (i = 0, len = data.length; i &lt; len; ++i) {
             d = data[i];
             if (typeof d === 'number') {
                 result.push(d);
