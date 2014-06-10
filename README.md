@@ -83,4 +83,28 @@ Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默�
     2. [function操作符](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function)
     3. [Function 构造函数](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function)
 
+- **完成一个函数，接受数组作为参数，数组元素为整数或者数组，数组元素包含整数或数组，函数返回扁平化后的数组**  
+如：[1, [2, [ [3, 4], 5], 6]] => [1, 2, 3, 4, 5, 6]
+
+<pre>
+    var data =  [1, [2, [ [3, 4], 5], 6]];
+
+    function flat(data, result) {
+        var i, d, len;
+        for (i = 0, len = data.length; i < len; ++i) {
+            d = data[i];
+            if (typeof d === 'number') {
+                result.push(d);
+            } else {
+                flat(d, result);
+            }
+        }
+    }
+
+    var result = [];
+    flat(data, result);
+
+    console.log(result);
+</pre>
+
 - 
