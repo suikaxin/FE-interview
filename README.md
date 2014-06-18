@@ -109,6 +109,7 @@ Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默�
 
 - **如何判断一个对象是否为数组**  
 如果浏览器支持Array.isArray()可以直接判断否则需进行必要判断
+
 <pre>
 /**
  * 判断一个对象是否是数组，参数不是对象或者不是数组，返回false
@@ -125,6 +126,7 @@ function isArray(arg) {
 </pre>
 
 - **如何判断一个对象是否为函数**  
+
 <pre>
 /**
  * 判断对象是否为函数，如果当前运行环境对可调用对象（如正则表达式）
@@ -144,5 +146,6 @@ function isFunction(arg) {
     return false;
 }
 </pre>
+
 - 
 - 
