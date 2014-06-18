@@ -107,4 +107,42 @@ Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默�
     console.log(result);
 </pre>
 
-- ****
+- **如何判断一个对象是否为数组**  
+如果浏览器支持Array.isArray()可以直接判断否则需进行必要判断
+<pre>
+/**
+ * 判断一个对象是否是数组，参数不是对象或者不是数组，返回false
+ * 
+ * @param {Object} arg 需要测试是否为数组的对象
+ * @return {Boolean} 传入参数是数组返回true，否则返回false
+ */
+function isArray(arg) {
+    if (typeof arg === 'object') {
+        return Object.prototype.toString.call(arg) === '[object Array]';
+    }
+    return false;
+}
+</pre>
+
+- **如何判断一个对象是否为函数**  
+<pre>
+/**
+ * 判断对象是否为函数，如果当前运行环境对可调用对象（如正则表达式）
+ * 的typeof返回'function'，采用通用方法，否则采用优化方法
+ * 
+ * @param {Any} arg 需要检测是否为函数的对象
+ * @return {boolean} 如果参数是函数，返回true，否则false
+ */
+function isFunction(arg) {
+    if (arg) {
+        if (typeof (/./) !== 'function') {
+            return typeof arg === 'function';
+        } else {
+            return Object.prototype.toString.call(arg) === '[object Function]';
+        }
+    } // end if
+    return false;
+}
+</pre>
+- 
+- 
