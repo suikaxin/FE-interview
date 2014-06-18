@@ -174,7 +174,7 @@ function parseQuery(query) {
     var key, value;
     var i, len;
 
-    for (i = 0, len = pairs.length; i < len; ++i) {
+    for (i = 0, len = pairs.length; i &lt; len; ++i) {
         pair = pairs[i].split('=');
         // application/x-www-form-urlencoded编码会将' '转换为+
         key = decodeURIComponent(pair[0]).replace(/\+/g, ' '); 
