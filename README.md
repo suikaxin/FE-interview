@@ -94,6 +94,10 @@ Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默�
     1. [函数声明表达式](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)
     2. [function操作符](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function)
     3. [Function 构造函数](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function)
+    4. [ES6:arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/arrow_functions)
+
+
+重要参考资料：[MDN:Functions_and_function_scope](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope)
 
 - **javascript有哪些方法定义对象**
     1. 对象字面量： <code>var obj = {};</code>
@@ -142,6 +146,30 @@ Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默�
     1. 如果有操作数是对象，转换为原始值
     2. 此时如果有**一个操作数是字符串**，其他的操作数都转换为字符串并执行连接
     3. 否则：**所有操作数都转换为数字并执行加法**
+
+- **函数内部arguments变量有哪些特性，有哪些属性，如何将它转换为数组**
+    - arguments所有函数中都包含的一个局部变量，是一个类数组对象，对应函数调用时的实参。如果函数定义同名参数会在调用时覆盖默认对象
+    - arguments[index]分别对应函数调用时的实参，并且通过arguments修改实参时会同时修改实参
+    - arguments.length为实参的个数（Function.length表示形参长度）
+    - arguments.callee为当前正在执行的函数本身，使用这个属性进行递归调用时需注意this的变化
+    - arguments.caller为调用当前函数的函数（已被遗弃）
+    - 转换为数组：<code>var args = Array.prototype.slice.call(arguments, 0);</code>
+    
+- **DOM事件模型是如何的**
+    - DOM事件包含捕获（capture）和冒泡（bubble）两个阶段：捕获阶段事件从window开始触发事件然后通过祖先节点一次传递到触发事件的DOM元素上；冒泡阶段事件从初始元素依次向祖先节点传递直到window
+    - 添加事件监听器的方法有三种：
+        - e.addEventListener(type, handler, capture)/e.removeEventListener(type, handler, capture)
+        - e.onclick = handler
+        - &lt;button onclick="alert(33)">&lt;/button>
+        - 老版本IE没有捕获只有冒泡，使用e.attachEvent(on + type, handler)/e.detachEvent(on + type, handler)
+    - 事件处理函数中this为当前事件触发的元素，e.target为实际触发事件的元素（老IE中为e.srcElement），事件处理函数的第一个参数为event对象（老IE中为window.event）
+    - 通常利用事件冒泡机制托管事件处理程序提高程序性能。
+
+- **评价一下三种方法实现继承的优缺点**
+<pre>
+function Person()
+</pre>
+
 
 - **完成一个函数，接受数组作为参数，数组元素为整数或者数组，数组元素包含整数或数组，函数返回扁平化后的数组**  
 如：[1, [2, [ [3, 4], 5], 6]] => [1, 2, 3, 4, 5, 6]
