@@ -340,4 +340,55 @@ function parseUrl(url) {
 }
 </pre>
 
+- **编写一个函数将列表子元素顺序反转**
+<pre>
+&lt;ul id="target">
+    &lt;li>1&lt;/li>
+    &lt;li>2&lt;/li>
+    &lt;li>3&lt;/li>
+    &lt;li>4&lt;/li>
+&lt;/ul>
+
+&lt;script>
+    var target = document.getElementById('target');
+    var i;
+    var frag = document.createDocumentFragment();
+
+    for (i = target.children.length - 1; i >= 0; --i) {
+        frag.appendChild(target.children[i]);
+    }
+    target.appendChild(frag);
+&lt;/script>
+</pre>
+
+- **以下函数的作用是？空白区域应该填写什么**
+<pre>
+// define
+(function (window) {
+    function fn(str) {
+        this.str = str;
+    }
+
+    fn.prototype.format = function () {
+        var arg = __1__;
+        return this.str.replace(__2__, function (a, b) {
+            return arg[b] || '';
+        });
+    };
+
+    window.fn = fn;
+})(window);
+
+// use
+(function () {
+    var t = new fn('&lt;p>&lt;a href="{0}">{1}&lt;/a>&lt;span>{2}&lt;/span>&lt;/p>');
+    console.log(t.format('http://www.alibaba.com', 'Alibaba', 'Welcome'));
+})();
+</pre>
+define部分定义一个简单的模板类，使用{}作为转义标记，中间的数字表示替换目标，format实参用来替换模板内标记  
+横线处填：  
+1: ``Array.prototype.slice.call(arguments, 0)``
+2: ``/\{\s*(\d+)\s*\}/g``
+
+- 
 - 
