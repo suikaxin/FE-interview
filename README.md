@@ -3,7 +3,6 @@
 个人收集的前端知识点、面试题和答案，参考答案仅代表个人观点，方便复习
 
 ### 常见问题
-<br />
 
 - **什么是web语义化，有什么好处**  
 web语义化是指通过HTML标记表示页面包含的信息，包含了HTML标签的语义化和css命名的语义化。  
@@ -14,8 +13,6 @@ css命名的语义化是指：为html标签添加有意义的class，id补充未
     - 盲人使用读屏器更好地阅读
     - 搜索引擎更好地理解页面，有利于收录
     - 便团队项目的可持续运作及维护  
-
-<br />
 
 - **如何进行网站性能优化**  
 [雅虎Best Practices for Speeding Up Your Web Site](https://developer.yahoo.com/performance/rules.html)
@@ -62,7 +59,6 @@ css命名的语义化是指：为html标签添加有意义的class，id补充未
         1. 保证组件小于25k
         2. Pack Components into a Multipart Document
 
-<br />
 
 - **什么是FOUC？如何避免？**  
 Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默认样式显示文档，用户样式加载渲染之后再从新显示文档，造成页面闪烁。**解决方法**：把样式表放到文档的`head` 
@@ -77,9 +73,55 @@ Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默�
     - 通过非侵入式、外部javascript提供增强功能
     - end-user web browser preferences are respected
 
-- 
+- **HTTP状态码及其含义**  
+参考[RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)
+    - 1XX：信息状态码
+        - **100 Continue**：客户端应当继续发送请求。这个临时相应是用来通知客户端它的部分请求已经被服务器接收，且仍未被拒绝。客户端应当继续发送请求的剩余部分，或者如果请求已经完成，忽略这个响应。服务器必须在请求万仇向客户端发送一个最终响应
+        - **101 Switching Protocols**：服务器已经理解力客户端的请求，并将通过Upgrade消息头通知客户端采用不同的协议来完成这个请求。在发送完这个响应最后的空行后，服务器将会切换到Upgrade消息头中定义的那些协议。
+    - 2XX：成功状态码
+        - **200 OK**：请求成功，请求所希望的响应头或数据体将随此响应返回
+        - **201 Created**：
+        - **202 Accepted**：
+        - **203 Non-Authoritative Information**：
+        - **204 No Content**：
+        - **205 Reset Content**：
+        - **206 Partial Content**：
+    - 3XX：重定向
+        - **300 Multiple Choices**：
+        - **301 Moved Permanently**：
+        - **302 Found**：
+        - **303 See Other**：
+        - **304 Not Modified**：
+        - **305 Use Proxy**：
+        - **306 （unused）**：
+        - **307 Temporary Redirect**：
+    - 4XX：客户端错误
+        - **400 Bad Request**:
+        - **401 Unauthorized**:
+        - **402 Payment Required**:
+        - **403 Forbidden**:
+        - **404 Not Found**:
+        - **405 Method Not Allowed**:
+        - **406 Not Acceptable**:
+        - **407 Proxy Authentication Required**:
+        - **408 Request Timeout**:
+        - **409 Conflict**:
+        - **410 Gone**:
+        - **411 Length Required**:
+        - **412 Precondition Failed**:
+        - **413 Request Entity Too Large**:
+        - **414 Request-URI Too Long**:
+        - **415 Unsupported Media Type**:
+        - **416 Requested Range Not Satisfiable**:
+        - **417 Expectation Failed**:
+    - 5XX: 服务器错误
+        - **500 Internal Server Error**:
+        - **501 Not Implemented**:
+        - **502 Bad Gateway**:
+        - **503 Service Unavailable**:
+        - **504 Gateway Timeout**:
+        - **505 HTTP Version Not Supported**:
 
-<br />
 ## CSS部分
 - **CSS有哪些继承属性**
     - 关于文字排版的属性如：`font`, `word-break`, `letter-spacing`,`text-align`,`tex--rendering`,`word-spacing`,`white-spacing`,`text-indent`,`text-transform`,`text-shadow`
