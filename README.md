@@ -86,8 +86,40 @@ Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默�
     - `line-height`
     - `color`
 
+- **如何确定一个元素的包含块（containing block）**
+    - 根元素的包含块叫做初始包含块，在连续媒体中他的尺寸与viewport相同并且anchored at the canvas origin；对于paged media，它的尺寸等于page area。初始包含块的direction属性与根元素相同。
+    - <code>position</code>为``relative``或者``static``的元素，它的包含块由最近的块级（``display``为``block``,``list-item``, ``table``）祖先元素的**内容框**组成
+    - 如果元素``position``为``fixed``。对于连续媒体，它的包含块为viewport；对于paged media，包含块为page area
+    - 如果元素``position``为``absolute``，它的包含块由祖先元素中最近一个``position``为``relative``,``absolute``或者``fixed``的元素产生，规则如下：
+        - 如果祖先元素为行内元素，the containing block is the bounding box around the **padding boxes** of the first and the last inline boxes generated for that element.
+        - 其他情况下包含块由祖先节点的**padding edge**组成
 
-<br />
+- **如何竖直居中一个元素**
+不同场景有不同的居中方案：
+    - 元素高度声明的情况下在父容器中居中：**绝对居中法**
+<pre>
+&lt;div class="parent">
+    &lt;div class="absolute-center">&lt;/div>
+&lt;/div>
+
+.parent {
+    position: relative;
+}
+.absolute-center {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    height: 70%;
+    width: 70%;
+}
+</pre>
+
+    - 
+
 
 ## javascript部分
 - **javascript有哪几种方法定义函数？**
@@ -338,6 +370,63 @@ function parseUrl(url) {
 
     return result;
 }
+</pre>
+
+- **完成函数getScrollOffset返回窗口滚动条偏移量**
+<pre>
+/**
+ * 获取指定window中滚动条的偏移量，如未指定则获取当前window
+ * 滚动条偏移量
+ * 
+ * @param {window} w 需要获取滚动条偏移量的窗口
+ * @return {Object} obj.x为水平滚动条偏移量,obj.y为竖直滚动条偏移量
+ */
+function getScrollOffset(w) {
+    w =  w || window;
+    // 如果是标准浏览器
+    if (w.pageXOffset != null) {
+        return {
+            x: w.pageXOffset, 
+            y: w.pageYOffset
+        };
+    }
+
+    // 老版本IE，根据兼容性不同访问不同元素
+    var d = w.document;
+    if (d.compatMode === 'CSS1Compat') {
+        return {
+            x: d.documentElement.scrollLeft,
+            y: d.documentElement.scrollTop
+        }
+    }
+
+    return {
+        x: d.body.scrollLeft,
+        y: d.body.scrollTop
+    };
+}
+</pre>
+
+- **现有一个字符串richText，是一段富文本，需要显示在页面上。有个要求，需要给其中只包含一个img元素的p标签增加一个叫pic的class。请编写代码实现。可以使用jQuery或KISSY。**
+<pre>
+function richText(text) {
+    var div = document.createElement('div');
+    div.innerHTML = text;
+    var p = div.getElementsByTagName('p');
+    var i, len;
+
+    for (i = 0, len = p.length; i &lt; len; ++i) {
+        if (p[i].getElementsByTagName('img').length === 1) {
+            p[i].classList.add('pic');
+        }
+    }
+
+    return div.innerHTML;
+}
+</pre>
+
+- **请实现一个Event类，继承自此类的对象都会拥有两个方法on和trigger**
+<pre>
 </pre>
 
 - 
