@@ -376,8 +376,6 @@ function parseUrl(url) {
 - **完成函数getScrollOffset返回窗口滚动条偏移量**
 
 <pre>
-
-```
 /**
  * 获取指定window中滚动条的偏移量，如未指定则获取当前window
  * 滚动条偏移量
@@ -409,8 +407,6 @@ function getScrollOffset(w) {
         y: d.body.scrollTop
     };
 }
-```
-
 </pre>
 
 
@@ -465,6 +461,7 @@ function richText(text) {
 
 
 - **以下函数的作用是？空白区域应该填写什么**
+
 <pre>
 // define
 (function (window) {
@@ -488,10 +485,13 @@ function richText(text) {
     console.log(t.format('http://www.alibaba.com', 'Alibaba', 'Welcome'));
 })();
 </pre>
+
 define部分定义一个简单的模板类，使用{}作为转义标记，中间的数字表示替换目标，format实参用来替换模板内标记  
 横线处填：  
-1: ``Array.prototype.slice.call(arguments, 0)``
-2: ``/\{\s*(\d+)\s*\}/g``
+
+1. ``Array.prototype.slice.call(arguments, 0)``
+2. ``/\{\s*(\d+)\s*\}/g``
+
 
 - 
 
