@@ -97,6 +97,7 @@ Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默�
 - **如何竖直居中一个元素**
 不同场景有不同的居中方案：
     - 元素高度声明的情况下在父容器中居中：**绝对居中法**
+
 <pre>
 &lt;div class="parent">
     &lt;div class="absolute-center">&lt;/div>
