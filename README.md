@@ -374,7 +374,10 @@ function parseUrl(url) {
 
 
 - **完成函数getScrollOffset返回窗口滚动条偏移量**
+
 <pre>
+
+```
 /**
  * 获取指定window中滚动条的偏移量，如未指定则获取当前window
  * 滚动条偏移量
@@ -406,10 +409,15 @@ function getScrollOffset(w) {
         y: d.body.scrollTop
     };
 }
+```
+
 </pre>
 
+
 - **现有一个字符串richText，是一段富文本，需要显示在页面上。有个要求，需要给其中只包含一个img元素的p标签增加一个叫pic的class。请编写代码实现。可以使用jQuery或KISSY。**
+
 <pre>
+
 function richText(text) {
     var div = document.createElement('div');
     div.innerHTML = text;
@@ -424,7 +432,9 @@ function richText(text) {
 
     return div.innerHTML;
 }
+
 </pre>
+
 
 - **请实现一个Event类，继承自此类的对象都会拥有两个方法on和trigger**
 <pre>
@@ -432,6 +442,7 @@ function richText(text) {
 
 
 - **编写一个函数将列表子元素顺序反转**
+
 <pre>
 &lt;ul id="target">
     &lt;li>1&lt;/li>
@@ -445,12 +456,13 @@ function richText(text) {
     var i;
     var frag = document.createDocumentFragment();
 
-    for (i = target.children.length - 1; i >= 0; --i) {
+    for (i = target.children.length - 1; i &gt;= 0; --i) {
         frag.appendChild(target.children[i]);
     }
     target.appendChild(frag);
 &lt;/script>
 </pre>
+
 
 - **以下函数的作用是？空白区域应该填写什么**
 <pre>
