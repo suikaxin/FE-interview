@@ -136,8 +136,8 @@ Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默�
         - 如果祖先元素为行内元素，the containing block is the bounding box around the **padding boxes** of the first and the last inline boxes generated for that element.
         - 其他情况下包含块由祖先节点的**padding edge**组成
 
-- **如何竖直居中一个元素**
-不同场景有不同的居中方案：
+- **如何竖直居中一个元素**  
+[盘点8种CSS实现垂直居中](http://blog.csdn.net/freshlover/article/details/11579669)  不同场景有不同的居中方案：
     - 元素高度声明的情况下在父容器中居中：**绝对居中法**
 
 <pre>
@@ -160,6 +160,126 @@ Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默�
     width: 70%;
 }
 </pre>
+
+优点：
+
+1. 跨浏览器，包括IE8-10
+2. 无需其他特色标记，CSS代码量少
+3. 完美支持图片居中
+4. 宽度高度可变，可用百分比
+
+缺点
+
+1. 必须声明高度
+2. windows Phone设备上不起作用
+
+    - **负外边距**：当元素宽度高度固定时。设置margin-top/margin-left为宽度高度一半的相反数，top:50%;left:50%
+
+<pre>
+&lt;div class="parent">
+    &lt;div class="negative-margin-center">&lt;/div>
+&lt;/div>
+
+.parent {
+    position: relative;
+}
+.absolute-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    margin-left: -150px;
+    margin-top: -150px;
+
+
+    height: 300px;
+    width: 300px;
+}
+</pre>
+
+优点：
+
+1. 良好的跨浏览器特性，兼容IE6-7
+2. 代码量少
+
+缺点：
+
+1. 不能自适应，不支持百分比尺寸和min-/max-属性设置
+2. 内容可能溢出容器
+3. 边距大小域与padding，box-sizing有关
+
+    - **CSS3 Transform**居中：这是最简单的方法
+
+<pre>
+&lt;div class="parent">
+    &lt;div class="transform-center">&lt;/div>
+&lt;/div>
+
+.parent {
+    position: relative;
+}
+.absolute-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    margin: auto;
+    width: 50%;
+
+    -webkit-transform: translate(-50%， -50%);
+       -moz-transform: translate(-50%， -50%);
+            transform: translate(-50%, -50%);
+}
+</pre>
+
+优点：
+
+1. 内容高度可变
+2. 代码量少
+
+缺点：
+
+1. IE8不支持
+2. 属性需要浏览器厂商前缀
+3. 可能干扰其他transform效果
+
+
+    - **table-cell**居中：
+
+<pre>
+&lt;div class="center-container is-table">
+    &lt;div class="table-cell">
+        &lt;div class="center-block">&lt;/div>
+    &lt;/div>
+&lt;/div>
+
+.center-container.is-table {
+    display: table;
+}
+
+.is-table .table-cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.is-table .center-block {
+    width: 50%;
+    margin: 0 auto;
+}
+</pre>
+
+优点：
+
+1. 高度可变
+2. 内容溢出会将父元素撑开
+3. 跨浏览器兼容性好
+
+缺点：
+
+1. 需要额外html标记
+
+    - **flexbox**居中
+
 
 
 
