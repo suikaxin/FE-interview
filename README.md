@@ -350,15 +350,63 @@ Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默�
     - arguments.caller为调用当前函数的函数（已被遗弃）
     - 转换为数组：<code>var args = Array.prototype.slice.call(arguments, 0);</code>
     
-- **DOM事件模型是如何的**
+- **DOM事件模型是如何的，编写一个EventUtil工具类实现事件管理兼容**
     - DOM事件包含捕获（capture）和冒泡（bubble）两个阶段：捕获阶段事件从window开始触发事件然后通过祖先节点一次传递到触发事件的DOM元素上；冒泡阶段事件从初始元素依次向祖先节点传递直到window
-    - 添加事件监听器的方法有三种：
-        - e.addEventListener(type, handler, capture)/e.removeEventListener(type, handler, capture)
-        - e.onclick = handler
-        - &lt;button onclick="alert(33)">&lt;/button>
-        - 老版本IE没有捕获只有冒泡，使用e.attachEvent(on + type, handler)/e.detachEvent(on + type, handler)
-    - 事件处理函数中this为当前事件触发的元素，e.target为实际触发事件的元素（老IE中为e.srcElement），事件处理函数的第一个参数为event对象（老IE中为window.event）
+    - 标准事件监听elem.addEventListener(type, handler, capture)/elem.removeEventListener(type, handler, capture)：handler接收保存事件信息的event对象作为参数，event.target为触发事件的对象，handler调用上下文this为绑定监听器的对象，event.preventDefault()取消事件默认行为，event.stopPropagation()/event.stopImmediatePropagation()取消事件传递
+    - 老版本IE事件监听elem.attachEvent('on'+type, handler)/elem.detachEvent('on'+type, handler)：handler不接收event作为参数，事件信息保存在window.event中，触发事件的对象为event.srcElement，handler执行上下文this为window使用闭包中调用handler.call(elem, event)可模仿标准模型，然后返回闭包，保证了监听器的移除。event.returnValue为false时取消事件默认行为，event.cancleBubble为true时取消时间传播
+
     - 通常利用事件冒泡机制托管事件处理程序提高程序性能。
+
+<pre>
+/**
+ * 跨浏览器事件处理工具。只支持冒泡。不支持捕获
+ * @author  (qiu_deqing@126.com)
+ */
+
+var EventUtil = {
+    getEvent: function (event) {
+        return event || window.event;
+    },
+    getTarget: function (event) {
+        return event.target || event.srcElement;
+    },
+    // 返回注册成功的监听器，IE中需要使用返回值来移除监听器
+    on: function (elem, type, handler) {
+        if (elem.addEventListener) {
+            elem.addEventListener(type, handler, false);
+            return handler;
+        } else if (elem.attachEvent) {
+            function wrapper(event) {
+                return handler.call(elem, event);
+            };
+            elem.attachEvent('on' + type, wrapper);
+            return wrapper;
+        }
+    },
+    off: function (elem, type, handler) {
+        if (elem.removeEventListener) {
+            elem.removeEventListener(type, handler, false);
+        } else if (elem.detachEvent) {
+            elem.detachEvent('on' + type, handler);
+        }
+    },
+    preventDefault: function (event) {
+        if (event.preventDefault) {
+            event.preventDefault();
+        } else if ('returnValue' in event) {
+            event.returnValue = false;
+        }
+    },
+    stopPropagation: function (event) {
+        if (event.stopPropagation) {
+            event.stopPropagation();
+        } else if ('cancelBubble' in event) {
+            event.cancelBubble = true;
+        }
+    }
+};
+</pre>
+
 
 - **评价一下三种方法实现继承的优缺点**
 <pre>
@@ -724,4 +772,106 @@ function serializeForm(form) {
 }
 </pre>
 
+- **使用原生javascript给下面列表中的li节点绑定点击事件，点击时创建一个Object对象，兼容IE和标准浏览器**
+
+<pre>
+&lt;ul id="nav">
+    &lt;li>&lt;a href="http://11111">111&lt;/a>&lt;/li>
+    &lt;li>&lt;a href="http://2222">222&lt;/a>&lt;/li>
+    &lt;li>&lt;a href="http://333">333&lt;/a>&lt;/li>
+    &lt;li>&lt;a href="http://444">444&lt;/a>&lt;/li>
+&lt;/ul>
+
+Object:
+{
+    "index": 1,
+    "name": "111",
+    "link": "http://1111"
+}
+</pre>
+
+script:
+
+<pre>
+var EventUtil = {
+    getEvent: function (event) {
+        return event || window.event;
+    },
+    getTarget: function (event) {
+        return event.target || event.srcElement;
+    },
+    // 返回注册成功的监听器，IE中需要使用返回值来移除监听器
+    on: function (elem, type, handler) {
+        if (elem.addEventListener) {
+            elem.addEventListener(type, handler, false);
+            return handler;
+        } else if (elem.attachEvent) {
+            function wrapper(event) {
+                return handler.call(elem, event);
+            };
+            elem.attachEvent('on' + type, wrapper);
+            return wrapper;
+        }
+    },
+    off: function (elem, type, handler) {
+        if (elem.removeEventListener) {
+            elem.removeEventListener(type, handler, false);
+        } else if (elem.detachEvent) {
+            elem.detachEvent('on' + type, handler);
+        }
+    },
+    preventDefault: function (event) {
+        if (event.preventDefault) {
+            event.preventDefault();
+        } else if ('returnValue' in event) {
+            event.returnValue = false;
+        }
+    },
+    stopPropagation: function (event) {
+        if (event.stopPropagation) {
+            event.stopPropagation();
+        } else if ('cancelBubble' in event) {
+            event.cancelBubble = true;
+        }
+    }
+};
+var DOMUtil = {
+    text: function (elem) {
+        if ('textContent' in elem) {
+            return elem.textContent;
+        } else if ('innerText' in elem) {
+            return elem.innerText;
+        }
+    },
+    prop: function (elem, propName) {
+        return elem.getAttribute(propName);
+    }
+};
+
+var nav = document.getElementById('nav');
+
+EventUtil.on(nav, 'click', function (event) {
+    var event = EventUtil.getEvent(event);
+    var target = EventUtil.getTarget(event);
+
+    var children = this.children;
+    var i, len;
+    var anchor;
+    var obj = {};
+
+    for (i = 0, len = children.length; i &lt; len; ++i) {
+        if (children[i] === target) {
+            obj.index = i + 1;
+            anchor = target.getElementsByTagName('a')[0];
+            obj.name = DOMUtil.text(anchor);
+            obj.link = DOMUtil.prop(anchor, 'href');
+        }
+    }
+
+    alert('index: ' + obj.index + ' name: ' + obj.name +
+        ' link: ' + obj.link);
+});
+</pre>
+
+- 
 - 
