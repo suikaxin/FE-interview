@@ -294,6 +294,52 @@ Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默�
 
 重要参考资料：[MDN:Functions_and_function_scope](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope)
 
+- **客户端存储localStorage和sessionStorage**
+
+    - localStorage有效期为永久，sessionStorage有效期为顶层窗口关闭前
+    - 同源文档可以读取并修改localStorage数据，sessionStorage只允许同一个窗口下的文档访问，如通过iframe引入的同源文档。
+    - Storage对象通常被当做普通javascript对象使用：**通过设置属性来存取字符串值**，也可以通过**setItem(key, value)设置**，**getItem(key)读取**，**removeItem(key)删除**，**clear()删除所有数据**，**length表示已存储的数据项数目**，**key(index)返回对应索引的key**
+
+<pre>
+localStorage.setItem('x', 1); // storge x->1
+localStorage.getItem('x); // return value of x
+
+// 枚举所有存储的键值对
+for (var i = 0, len = localStorage.length; i &lt; len; ++i ) {
+    var name = localStorage.key(i);
+    var value = localStorage.getItem(name);
+}
+
+localStorage.removeItem('x'); // remove x
+localStorage.clear();  // remove all data
+
+</pre>
+
+- **cookie及其操作**  
+    - cookie是web浏览器存储的少量数据，最早设计为服务器端使用，作为HTTP协议的扩展实现。cookie数据会自动在浏览器和服务器之间传输。
+    - 通过读写cookie检测是否支持
+    - cookie属性有**名**，**值**，**有效期**，**作用域**，**secure**；
+    - cookie默认有效期为浏览器会话，一旦用户关闭浏览器，数据就丢失，通过设置**max-age=seconds**属性告诉浏览器cookie有效期
+    - cookie作用域通过**文档源**和**文档路径**来确定，通过**path**和**domain**进行配置，web页面同目录或子目录文档都可访问
+    - 通过cookie保存数据的方法为：为document.cookie设置一个符合目标的字符串如下
+    - 读取document.cookie获得'; '分隔的字符串，key=value,解析得到结果
+
+<pre>
+document.cookie = 'name=qiu; max-age=9999; path=/; domain=domain; secure';
+
+document.cookie = 'name=aaa; path=/; domain=domain; secure'; 
+// 要改变cookie的值，需要使用相同的名字、路径和域，新的值
+// 来设置cookie，同样的方法可以用来改变有效期
+
+// 设置max-age为0可以删除指定cookie
+
+//读取cookie，访问document.cookie返回键值对组成的字符串，
+//不同键值对之间用'; '分隔。通过解析获得需要的值
+
+</pre>
+
+[cookieUtil.js](https://github.com/qiu-deqing/google/blob/master/module/js/cookieUtil.js)：自己写的cookie操作工具
+
 - **javascript有哪些方法定义对象**
     1. 对象字面量： <code>var obj = {};</code>
     2. 构造函数： <code>var obj = new Object();</code>
