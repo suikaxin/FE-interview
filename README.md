@@ -60,8 +60,6 @@ css命名的语义化是指：为html标签添加有意义的class，id补充未
         2. Pack Components into a Multipart Document
 
 
-- **什么是FOUC？如何避免？**  
-Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默认样式显示文档，用户样式加载渲染之后再从新显示文档，造成页面闪烁。**解决方法**：把样式表放到文档的`head` 
 
 - **什么是渐进增强**  
 渐进增强是指在web设计时强调可访问性、语义化HTML标签、外部样式表和脚本。保证所有人都能访问页面的基本内容和功能同时为高级浏览器和高带宽用户提供更好的用户体验。核心原则如下:  
@@ -128,13 +126,65 @@ Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默�
     - `line-height`
     - `color`
 
+
+- **什么是FOUC？如何避免？**  
+Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默认样式显示文档，用户样式加载渲染之后再从新显示文档，造成页面闪烁。**解决方法**：把样式表放到文档的`head` 
+
+- **如何创建块级格式化上下文（block formatting context）？有什么用**  
+创建规则：  
+1.根元素  
+2.浮动元素（``float``不是``none``）  
+3.绝对定位元素（``position``取值为``absolute``或``fixed``）  
+4.``display``取值为``inline-block``,``table-cell``, ``table-caption``,``flex``, ``inline-flex``之一的元素  
+5.``overflow``不是``visible``的元素  
+作用：  
+1.可以包含浮动元素  
+2.不被浮动元素覆盖  
+3.阻止父子元素的margin折叠
+
+- **display, float, position的关系**  
+1.如果``display``为none，那么position和float都不起作用，这种情况下元素不产生框  
+2.否则，如果position值为absolute或者fixed，框就是绝对定位的，float的计算值为none，display根据下面的表格进行调整。  
+3.否则，如果float不是none，框是浮动的，display根据下表进行调整  
+4.否则，如果元素是根元素，display根据下表进行调整  
+5.其他情况下display的值为指定值  
+
+
+![display转换规则](http://qiu-deqing.github.io/image/display-adjust.png)
+
+- **外边距折叠（collapsing margins）**  
+毗邻的两个或多个``margin``会合并成一个margin，叫做外边距折叠。规则如下：  
+1.两个或多个毗邻的普通流中的块元素垂直方向上的margin会折叠
+2.浮动元素/inline-block元素/绝对定位元素的margin不会和垂直方向上的其他元素的margin折叠  
+3.创建了块级格式化上下文的元素，不会和它的子元素发生margin折叠  
+4.元素自身的margin-bottom和margin-top相邻时也会折叠
+
+
+
 - **如何确定一个元素的包含块（containing block）**
     - 根元素的包含块叫做初始包含块，在连续媒体中他的尺寸与viewport相同并且anchored at the canvas origin；对于paged media，它的尺寸等于page area。初始包含块的direction属性与根元素相同。
     - <code>position</code>为``relative``或者``static``的元素，它的包含块由最近的块级（``display``为``block``,``list-item``, ``table``）祖先元素的**内容框**组成
     - 如果元素``position``为``fixed``。对于连续媒体，它的包含块为viewport；对于paged media，包含块为page area
     - 如果元素``position``为``absolute``，它的包含块由祖先元素中最近一个``position``为``relative``,``absolute``或者``fixed``的元素产生，规则如下：
         - 如果祖先元素为行内元素，the containing block is the bounding box around the **padding boxes** of the first and the last inline boxes generated for that element.
-        - 其他情况下包含块由祖先节点的**padding edge**组成
+        - 其他情况下包含块由祖先节点的**padding edge**组成  
+
+
+- **stacking context，布局规则**  
+z轴上的默认层叠顺序如下（从下到上）：  
+1.根元素的边界和背景  
+2.常规流中的元素按照html中顺序  
+3.浮动块  
+4.positioned元素按照html中出现顺序  
+如何创建stacking context：  
+1.根元素  
+2.z-index不为auto的定位元素  
+3.a flex item with a z-index value other than 'auto'  
+4.opacity小于1的元素  
+5.在移动端webkit和chrome22+，z-index为auto，position: fixed也将创建新的stacking context  
+
+
+
 
 - **如何竖直居中一个元素**  
 [盘点8种CSS实现垂直居中](http://blog.csdn.net/freshlover/article/details/11579669)  不同场景有不同的居中方案：
