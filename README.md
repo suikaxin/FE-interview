@@ -298,7 +298,9 @@ z轴上的默认层叠顺序如下（从下到上）：
 2. 内容可能溢出容器
 3. 边距大小域与padding，box-sizing有关
 
+
     - **CSS3 Transform**居中：这是最简单的方法
+
 <pre>
 &lt;div class="parent">
     &lt;div class="transform-center">&lt;/div>
@@ -333,6 +335,8 @@ z轴上的默认层叠顺序如下（从下到上）：
 3. 可能干扰其他transform效果
 
     - **table-cell**居中：
+
+
 <pre>
 &lt;div class="center-container is-table">
     &lt;div class="table-cell">
@@ -380,7 +384,7 @@ z轴上的默认层叠顺序如下（从下到上）：
 
 重要参考资料：[MDN:Functions_and_function_scope](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope)
 
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br />
 
 - **应用程序存储和离线web应用**  
 HTML5新增应用程序缓存，允许web应用将应用程序自身保存到用户浏览器中，用户离线状态也能访问。  
@@ -424,7 +428,12 @@ localStorage.clear();  // remove all data
 
 </pre>
 
-<br /><br /><br /><br /><br /><br /><br /><br />
+
+
+
+
+
+<br />
 
 - **cookie及其操作**  
     - cookie是web浏览器存储的少量数据，最早设计为服务器端使用，作为HTTP协议的扩展实现。cookie数据会自动在浏览器和服务器之间传输。
@@ -450,7 +459,10 @@ document.cookie = 'name=aaa; path=/; domain=domain; secure';
 
 [cookieUtil.js](https://github.com/qiu-deqing/google/blob/master/module/js/cookieUtil.js)：自己写的cookie操作工具
 
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+
+
+<br />
 
 - **javascript有哪些方法定义对象**
     1. 对象字面量： <code>var obj = {};</code>
@@ -469,12 +481,7 @@ document.cookie = 'name=aaa; path=/; domain=domain; secure';
     6. 如果他们都是字符串并且在相同位置包含相同的16位值，他它们相等；如果在长度或者内容上不等，它们不相等；两个字符串显示结果相同但是编码不同==和===都认为他们不相等
     7. 如果他们指向相同对象、数组、函数，它们相等；如果指向不同对象，他们不相等
 
-
-
-
-
-
-<br />
+<br /><br /><br /><br />
 
 - **==运算符判断相等的流程是怎样的**
 
@@ -488,8 +495,6 @@ document.cookie = 'name=aaa; path=/; domain=domain; secure';
         5. **其他所有情况都认为不相等**
 
 
-
-
 <br />
 
 - **对象到字符串的转换步骤**
@@ -497,25 +502,14 @@ document.cookie = 'name=aaa; path=/; domain=domain; secure';
     2. 如果对象没有toString()方法或者返回值不是原始值，javascript寻找对象的valueOf()方法，如果存在就调用它，返回结果是原始值则转为字符串作为结果
     3. 否则，javascript不能从toString()或者valueOf()获得一个原始值，此时throws a TypeError
 
-
-
-
-
-
-<br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
 -  **对象到数字的转换步骤**
     1. 如果对象有valueOf()方法并且返回元素值，javascript将返回值转换为数字作为结果
     2. 否则，如果对象有toString()并且返回原始值，javascript将返回结果转换为数字作为结果
     3. 否则，throws a TypeError
 
-
-
-
-
-
-
-<br />
+<br /><br /><br /><br />
 
 - **&lt;,&gt;,&lt;=,&gt;=的比较规则**  
 所有比较运算符都支持任意类型，但是**比较只支持数字和字符串**，所以需要执行必要的转换然后进行比较，转换规则如下:
@@ -524,21 +518,12 @@ document.cookie = 'name=aaa; path=/; domain=domain; secure';
     3. 否则，如果有一个操作数不是字符串，**将两个操作数转换为数字**进行比较
 
 
-
-
-
-
-<br />
+<br /><br /><br />
 
 - **+运算符工作流程**
     1. 如果有操作数是对象，转换为原始值
     2. 此时如果有**一个操作数是字符串**，其他的操作数都转换为字符串并执行连接
     3. 否则：**所有操作数都转换为数字并执行加法**
-
-
-
-
-
 
 
 <br />
@@ -615,6 +600,8 @@ var EventUtil = {
 
 
 - **评价一下三种方法实现继承的优缺点**
+
+
 <pre>
 function Person()
 </pre>
@@ -925,6 +912,7 @@ function richText(text) {
 <br /><br /><br /><br /><br /><br /><br />
 
 - **编写一个函数将列表子元素顺序反转**
+
 <pre>
 &lt;ul id="target">
     &lt;li>1&lt;/li>
@@ -1051,6 +1039,7 @@ function serializeForm(form) {
 <br />
 
 - **使用原生javascript给下面列表中的li节点绑定点击事件，点击时创建一个Object对象，兼容IE和标准浏览器**
+
 <pre>
 &lt;ul id="nav">
     &lt;li>&lt;a href="http://11111">111&lt;/a>&lt;/li>
