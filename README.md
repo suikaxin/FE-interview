@@ -1,7 +1,6 @@
 ## FE-interview
 
 个人收集的前端知识点、面试题和答案，参考答案仅代表个人观点，方便复习
-
 ### 常见问题
 
 - **什么是web语义化，有什么好处**  
@@ -13,6 +12,9 @@ css命名的语义化是指：为html标签添加有意义的class，id补充未
     - 盲人使用读屏器更好地阅读
     - 搜索引擎更好地理解页面，有利于收录
     - 便团队项目的可持续运作及维护  
+
+
+
 
 - **如何进行网站性能优化**  
 [雅虎Best Practices for Speeding Up Your Web Site](https://developer.yahoo.com/performance/rules.html)
@@ -61,6 +63,11 @@ css命名的语义化是指：为html标签添加有意义的class，id补充未
 
 
 
+
+
+
+
+
 - **什么是渐进增强**  
 渐进增强是指在web设计时强调可访问性、语义化HTML标签、外部样式表和脚本。保证所有人都能访问页面的基本内容和功能同时为高级浏览器和高带宽用户提供更好的用户体验。核心原则如下:  
 
@@ -70,6 +77,7 @@ css命名的语义化是指：为html标签添加有意义的class，id补充未
     - 通过外部CSS提供增强的布局
     - 通过非侵入式、外部javascript提供增强功能
     - end-user web browser preferences are respected
+
 
 - **HTTP状态码及其含义**  
 参考[RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)
@@ -120,15 +128,30 @@ css命名的语义化是指：为html标签添加有意义的class，id补充未
         - **504 Gateway Timeout**:
         - **505 HTTP Version Not Supported**:
 
+
+
+
+
+
+
+
+
+
+<br />
 ## CSS部分
+
+
 - **CSS有哪些继承属性**
     - 关于文字排版的属性如：`font`, `word-break`, `letter-spacing`,`text-align`,`tex--rendering`,`word-spacing`,`white-spacing`,`text-indent`,`text-transform`,`text-shadow`
     - `line-height`
     - `color`
 
+<br />
 
 - **什么是FOUC？如何避免？**  
 Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默认样式显示文档，用户样式加载渲染之后再从新显示文档，造成页面闪烁。**解决方法**：把样式表放到文档的`head` 
+
+<br />
 
 - **如何创建块级格式化上下文（block formatting context）？有什么用**  
 创建规则：  
@@ -142,15 +165,28 @@ Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默�
 2.不被浮动元素覆盖  
 3.阻止父子元素的margin折叠
 
+
 - **display, float, position的关系**  
 1.如果``display``为none，那么position和float都不起作用，这种情况下元素不产生框  
 2.否则，如果position值为absolute或者fixed，框就是绝对定位的，float的计算值为none，display根据下面的表格进行调整。  
 3.否则，如果float不是none，框是浮动的，display根据下表进行调整  
 4.否则，如果元素是根元素，display根据下表进行调整  
 5.其他情况下display的值为指定值  
-
+总结起来：**绝对定位、浮动、根元素都需要调整``display``**
 
 ![display转换规则](http://qiu-deqing.github.io/image/display-adjust.png)
+
+
+
+
+
+
+
+
+
+
+
+<br />
 
 - **外边距折叠（collapsing margins）**  
 毗邻的两个或多个``margin``会合并成一个margin，叫做外边距折叠。规则如下：  
@@ -160,6 +196,7 @@ Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默�
 4.元素自身的margin-bottom和margin-top相邻时也会折叠
 
 
+<br /><br />
 
 - **如何确定一个元素的包含块（containing block）**
     - 根元素的包含块叫做初始包含块，在连续媒体中他的尺寸与viewport相同并且anchored at the canvas origin；对于paged media，它的尺寸等于page area。初始包含块的direction属性与根元素相同。
@@ -169,6 +206,7 @@ Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默�
         - 如果祖先元素为行内元素，the containing block is the bounding box around the **padding boxes** of the first and the last inline boxes generated for that element.
         - 其他情况下包含块由祖先节点的**padding edge**组成  
 
+<br /><br /><br /><br />
 
 - **stacking context，布局规则**  
 z轴上的默认层叠顺序如下（从下到上）：  
@@ -223,6 +261,8 @@ z轴上的默认层叠顺序如下（从下到上）：
 1. 必须声明高度
 2. windows Phone设备上不起作用
 
+
+
     - **负外边距**：当元素宽度高度固定时。设置margin-top/margin-left为宽度高度一半的相反数，top:50%;left:50%
 
 <pre>
@@ -257,6 +297,7 @@ z轴上的默认层叠顺序如下（从下到上）：
 1. 不能自适应，不支持百分比尺寸和min-/max-属性设置
 2. 内容可能溢出容器
 3. 边距大小域与padding，box-sizing有关
+
 
     - **CSS3 Transform**居中：这是最简单的方法
 
@@ -293,8 +334,8 @@ z轴上的默认层叠顺序如下（从下到上）：
 2. 属性需要浏览器厂商前缀
 3. 可能干扰其他transform效果
 
-
     - **table-cell**居中：
+
 
 <pre>
 &lt;div class="center-container is-table">
@@ -331,8 +372,7 @@ z轴上的默认层叠顺序如下（从下到上）：
     - **flexbox**居中
 
 
-
-
+<br /><br /><br /><br /><br /><br />
 
 ## javascript部分
 - **javascript有哪几种方法定义函数？**
@@ -343,6 +383,8 @@ z轴上的默认层叠顺序如下（从下到上）：
 
 
 重要参考资料：[MDN:Functions_and_function_scope](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope)
+
+<br /><br /><br /><br /><br /><br /><br /><br />
 
 - **应用程序存储和离线web应用**  
 HTML5新增应用程序缓存，允许web应用将应用程序自身保存到用户浏览器中，用户离线状态也能访问。  
@@ -386,6 +428,13 @@ localStorage.clear();  // remove all data
 
 </pre>
 
+
+
+
+
+
+<br />
+
 - **cookie及其操作**  
     - cookie是web浏览器存储的少量数据，最早设计为服务器端使用，作为HTTP协议的扩展实现。cookie数据会自动在浏览器和服务器之间传输。
     - 通过读写cookie检测是否支持
@@ -406,15 +455,21 @@ document.cookie = 'name=aaa; path=/; domain=domain; secure';
 
 //读取cookie，访问document.cookie返回键值对组成的字符串，
 //不同键值对之间用'; '分隔。通过解析获得需要的值
-
 </pre>
 
 [cookieUtil.js](https://github.com/qiu-deqing/google/blob/master/module/js/cookieUtil.js)：自己写的cookie操作工具
+
+
+
+
+<br />
 
 - **javascript有哪些方法定义对象**
     1. 对象字面量： <code>var obj = {};</code>
     2. 构造函数： <code>var obj = new Object();</code>
     3. Object.create(): <code>var obj = Object.create(Object.prototype);</code>
+
+<br />
 
 - **===运算符判断相等的流程是怎样的**  
 
@@ -425,6 +480,8 @@ document.cookie = 'name=aaa; path=/; domain=domain; secure';
     5. 如果都是数值型并且数值相等，他们相等， -0等于0
     6. 如果他们都是字符串并且在相同位置包含相同的16位值，他它们相等；如果在长度或者内容上不等，它们不相等；两个字符串显示结果相同但是编码不同==和===都认为他们不相等
     7. 如果他们指向相同对象、数组、函数，它们相等；如果指向不同对象，他们不相等
+
+<br /><br /><br /><br />
 
 - **==运算符判断相等的流程是怎样的**
 
@@ -438,15 +495,21 @@ document.cookie = 'name=aaa; path=/; domain=domain; secure';
         5. **其他所有情况都认为不相等**
 
 
+<br />
+
 - **对象到字符串的转换步骤**
     1. 如果对象有toString()方法，javascript调用它。如果返回一个原始值（primitive value如：string number boolean）,将这个值转换为字符串作为结果
     2. 如果对象没有toString()方法或者返回值不是原始值，javascript寻找对象的valueOf()方法，如果存在就调用它，返回结果是原始值则转为字符串作为结果
     3. 否则，javascript不能从toString()或者valueOf()获得一个原始值，此时throws a TypeError
 
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
 -  **对象到数字的转换步骤**
     1. 如果对象有valueOf()方法并且返回元素值，javascript将返回值转换为数字作为结果
     2. 否则，如果对象有toString()并且返回原始值，javascript将返回结果转换为数字作为结果
     3. 否则，throws a TypeError
+
+<br /><br /><br /><br />
 
 - **&lt;,&gt;,&lt;=,&gt;=的比较规则**  
 所有比较运算符都支持任意类型，但是**比较只支持数字和字符串**，所以需要执行必要的转换然后进行比较，转换规则如下:
@@ -454,10 +517,16 @@ document.cookie = 'name=aaa; path=/; domain=domain; secure';
     2. 经过必要的对象到原始值的转换后，如果两个操作数都是字符串，按照字母顺序进行比较（他们的16位unicode值的大小）
     3. 否则，如果有一个操作数不是字符串，**将两个操作数转换为数字**进行比较
 
+
+<br /><br /><br />
+
 - **+运算符工作流程**
     1. 如果有操作数是对象，转换为原始值
     2. 此时如果有**一个操作数是字符串**，其他的操作数都转换为字符串并执行连接
     3. 否则：**所有操作数都转换为数字并执行加法**
+
+
+<br />
 
 - **函数内部arguments变量有哪些特性，有哪些属性，如何将它转换为数组**
     - arguments所有函数中都包含的一个局部变量，是一个类数组对象，对应函数调用时的实参。如果函数定义同名参数会在调用时覆盖默认对象
@@ -467,6 +536,9 @@ document.cookie = 'name=aaa; path=/; domain=domain; secure';
     - arguments.caller为调用当前函数的函数（已被遗弃）
     - 转换为数组：<code>var args = Array.prototype.slice.call(arguments, 0);</code>
     
+
+<br />
+
 - **DOM事件模型是如何的，编写一个EventUtil工具类实现事件管理兼容**
     - DOM事件包含捕获（capture）和冒泡（bubble）两个阶段：捕获阶段事件从window开始触发事件然后通过祖先节点一次传递到触发事件的DOM元素上；冒泡阶段事件从初始元素依次向祖先节点传递直到window
     - 标准事件监听elem.addEventListener(type, handler, capture)/elem.removeEventListener(type, handler, capture)：handler接收保存事件信息的event对象作为参数，event.target为触发事件的对象，handler调用上下文this为绑定监听器的对象，event.preventDefault()取消事件默认行为，event.stopPropagation()/event.stopImmediatePropagation()取消事件传递
@@ -528,10 +600,13 @@ var EventUtil = {
 
 
 - **评价一下三种方法实现继承的优缺点**
+
+
 <pre>
 function Person()
 </pre>
 
+<br /><br /><br /><br />
 
 - **完成一个函数，接受数组作为参数，数组元素为整数或者数组，数组元素包含整数或数组，函数返回扁平化后的数组**  
 如：[1, [2, [ [3, 4], 5], 6]] => [1, 2, 3, 4, 5, 6]
@@ -557,6 +632,8 @@ function Person()
     console.log(result);
 </pre>
 
+<br />
+
 - **如何判断一个对象是否为数组**  
 如果浏览器支持Array.isArray()可以直接判断否则需进行必要判断
 
@@ -574,6 +651,8 @@ function isArray(arg) {
     return false;
 }
 </pre>
+
+<br /><br /><br />
 
 - **请评价以下代码并给出改进意见**
 
@@ -631,7 +710,7 @@ else if (window.attachEvent) {
 }
 </pre>
 
-
+<br /><br /><br /><br /><br />
 
 - **如何判断一个对象是否为函数**  
 
@@ -654,6 +733,8 @@ function isFunction(arg) {
     return false;
 }
 </pre>
+
+<br />
 
 - **编写一个函数接受url中query string为参数，返回解析后的Object，query string使用application/x-www-form-urlencoded编码**  
 
@@ -718,10 +799,11 @@ console.log(parseQuery('sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#ie=UTF-8&q
  */
 </pre>
 
+<br /><br /><br /><br />
+
 - **解析一个完整的url，返回Object包含域与window.location相同**  
 
 <pre>
-
 /**
  * 解析一个url并生成window.location对象中包含的域
  * location:
@@ -760,6 +842,7 @@ function parseUrl(url) {
 }
 </pre>
 
+<br /><br /><br /><br /><br /><br />
 
 - **完成函数getScrollOffset返回窗口滚动条偏移量**
 
@@ -797,6 +880,7 @@ function getScrollOffset(w) {
 }
 </pre>
 
+<br /><br />
 
 - **现有一个字符串richText，是一段富文本，需要显示在页面上。有个要求，需要给其中只包含一个img元素的p标签增加一个叫pic的class。请编写代码实现。可以使用jQuery或KISSY。**
 
@@ -819,11 +903,13 @@ function richText(text) {
 
 </pre>
 
+<br /><br /><br /><br />
 
 - **请实现一个Event类，继承自此类的对象都会拥有两个方法on和trigger**
 <pre>
 </pre>
 
+<br /><br /><br /><br /><br /><br /><br />
 
 - **编写一个函数将列表子元素顺序反转**
 
@@ -847,9 +933,9 @@ function richText(text) {
 &lt;/script>
 </pre>
 
+<br /><br /><br /><br /><br />
 
 - **以下函数的作用是？空白区域应该填写什么**
-
 <pre>
 // define
 (function (window) {
@@ -880,6 +966,7 @@ define部分定义一个简单的模板类，使用{}作为转义标记，中间
 1. ``Array.prototype.slice.call(arguments, 0)``
 2. ``/\{\s*(\d+)\s*\}/g``
 
+<br /><br /><br /><br />
 
 - **编写一个函数实现form的序列化（即将一个表单中的键值序列化为可提交的字符串）**
 
@@ -948,6 +1035,8 @@ function serializeForm(form) {
     return result.join('&amp;');
 }
 </pre>
+
+<br />
 
 - **使用原生javascript给下面列表中的li节点绑定点击事件，点击时创建一个Object对象，兼容IE和标准浏览器**
 
@@ -1050,5 +1139,57 @@ EventUtil.on(nav, 'click', function (event) {
 });
 </pre>
 
-- 
+<br />
+
+- **有一个大数组，var a = ['1', '2', '3', ...]; a的长度是100，内容填充随机整数的字符串。请先构造此数组a，然后设计一个算法将其内容去重**  
+
+<pre>
+    /**
+    * 数组去重
+    **/
+    function normalize(arr) {
+        if (arr && Array.isArray(arr)) {
+            var i, len, map = {};
+            for (i = arr.length; i >= 0; --i) {
+                if (arr[i] in map) {
+                    arr.splice(i, 1);
+                } else {
+                    map[arr[i]] = true;
+                }
+            }
+        }
+        return arr;
+    }
+
+    /**
+    * 用100个随机整数对应的字符串填充数组。
+    **/
+    function fillArray(arr, start, end) {
+        start = start == undefined ? 1 : start;
+        end = end == undefined ?  100 : end;
+
+        if (end &lt;= start) {
+            end = start + 100;
+        }
+
+        var width = end - start;
+        var i;
+        for (i = 100; i >= 1; --i) {
+            arr.push('' + (Math.floor(Math.random() * width) + start));
+        }
+        return arr;
+    }
+
+    var input = [];
+    fillArray(input, 1, 100);
+    input.sort(function (a, b) {
+        return a - b;
+    });
+    console.log(input);
+
+    normalize(input);
+    console.log(input);
+</pre>
+
+
 - 
