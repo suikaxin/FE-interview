@@ -221,6 +221,24 @@ Content-Type: text/html; charset=iso-8859-1
 
 <br />
 
+- **IE浏览器有哪些常见的bug，缺陷或者与标准不一致的地方，如何解决**
+
+1.IE5-8不支持``opacity``，解决办法：
+
+<pre>
+.opacity {
+    filter: alpha(opacity=50); /* for IE5-7 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; /* for IE 8*/
+}
+</pre>
+  
+2.IE6在设置``height``小于``font-size``时高度值为``font-size``，解决办法：``font-size: 0;``
+
+3.IE6不支持PNG透明背景，解决办法: **IE6下使用gif图片**
+
+
+<br />
+
 - **什么是FOUC？如何避免？**  
 Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默认样式显示文档，用户样式加载渲染之后再从新显示文档，造成页面闪烁。**解决方法**：把样式表放到文档的`head` 
 
