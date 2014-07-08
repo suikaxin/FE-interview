@@ -13,8 +13,93 @@ css命名的语义化是指：为html标签添加有意义的class，id补充未
     - 搜索引擎更好地理解页面，有利于收录
     - 便团队项目的可持续运作及维护  
 
+<br />
+
+- **HTTP method**  
+1.一台服务器要与HTTP1.1兼容，只要为资源实现**GET**和**HEAD**方法即可  
+2.**GET**是最常用的方法，通常用于**请求服务器发送某个资源**。
+3.**HEAD**与GET类似，但**服务器在响应中值返回首部，不返回实体的主体部分**。
+4.**PUT**让服务器**用请求的主体部分来创建一个由所请求的URL命名的新文档，或者，如果那个URL已经存在的话，就用干这个主体替代它**  
+4.**POST**起初是用来向服务器输入数据的。实际上，通常会用它来支持HTML的表单。表单中填好的数据通常会被送给服务器，然后由服务器将其发送到要去的地方。  
+5.**TRACE**会在目的服务器端发起一个环回诊断，最后一站的服务器会弹回一个TRACE响应并在响应主体中携带它收到的原始请求报文。TRACE方法主要用于诊断，用于验证请求是否如愿穿过了请求/响应链。  
+6**OPTIONS**方法请求web服务器告知其支持的各种功能。可以查询服务器支持哪些方法或者对某些特殊资源支持哪些方法。  
+7.**DELETE**请求服务器删除请求URL指定的资源
+
+<br />
+
+- **从浏览器地址栏输入url到显示页面的步骤(以HTTP为例)**
+    1. 在浏览器地址栏**输入URL**
+    2. 浏览器**解析URL**获取协议，主机，端口，path
+    3. 浏览器**组装一个HTTP请求报文**
+    4. 浏览器**获取主机对应的ip地址**，过程如下：
+        1. 浏览器缓存
+        2. 本机缓存
+        3. DNS查询。后续继续查
+    5. 浏览器**打开一个socket与目标IP地址，端口建立TCP链接**
+    6. 建立TCP连接后，浏览器**发送HTTP请求**
+    7. 目的主机**将请求转发到服务器软件（如Apache）**
+    8. 服务器**解析请求并启动程序执行操作**
+    9. 请求处理程序获取完整的请求并开始准备HTTP响应，可能需要查询数据库等操作
+    10. 服务器将**组成响应报文并向浏览器发送响应**
+    11. 浏览器**接受响应并解析HTML文档，构建DOM树**
+    12. **解析过程中遇到图片，样式表，js文件，启动下载**
+    13. **计算样式，执行脚本，显示页面**
+    14. **关闭连接**
 
 
+
+- **HTTP request报文结构是怎样的**  
+[rfc2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html)中进行了定义：  
+1.首行是**Request-Line**包括：**请求方法**，**请求URI**，**协议版本**，**CRLF**  
+2.首行之后是若干行**请求头**，包括**general-header**，**request-header**或者**entity-header**，每个一行以CRLF结束  
+3.请求头和消息实体之间有一个**CRLF分隔**  
+4.根据实际请求需要可能包含一个**消息实体**  
+一个请求报文例子如下：
+
+<pre>
+GET /Protocols/rfc2616/rfc2616-sec5.html HTTP/1.1
+Host: www.w3.org
+Connection: keep-alive
+Cache-Control: max-age=0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36
+Referer: https://www.google.com.hk/
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: zh-CN,zh;q=0.8,en;q=0.6
+Cookie: authorstyle=yes
+If-None-Match: "2cc8-3e3073913b100"
+If-Modified-Since: Wed, 01 Sep 2004 13:24:52 GMT
+
+name=qiu&age=25
+</pre>
+
+<br />
+
+- **HTTP response报文结构是怎样的**  
+[rfc2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec6.html)中进行了定义：  
+1.首行是**状态行**包括：**HTTP版本，状态码，状态描述**，后面跟一个CRLF  
+2.首行之后是**若干行响应头**，包括：**通用头部，响应头部，实体头部**  
+3.响应头部和响应实体之间用**一个CRLF空行**分隔  
+4.最后是一个可能的**消息实体**  
+响应报文例子如下：  
+
+<pre>
+HTTP/1.1 200 OK
+Date: Tue, 08 Jul 2014 05:28:43 GMT
+Server: Apache/2
+Last-Modified: Wed, 01 Sep 2004 13:24:52 GMT
+ETag: "40d7-3e3073913b100"
+Accept-Ranges: bytes
+Content-Length: 16599
+Cache-Control: max-age=21600
+Expires: Tue, 08 Jul 2014 11:28:43 GMT
+P3P: policyref="http://www.w3.org/2001/05/P3P/p3p.xml"
+Content-Type: text/html; charset=iso-8859-1
+
+{"name": "qiu", "age": 25}
+</pre>
+
+<br />
 
 - **如何进行网站性能优化**  
 [雅虎Best Practices for Speeding Up Your Web Site](https://developer.yahoo.com/performance/rules.html)
@@ -60,11 +145,6 @@ css命名的语义化是指：为html标签添加有意义的class，id补充未
     - 移动方面
         1. 保证组件小于25k
         2. Pack Components into a Multipart Document
-
-
-
-
-
 
 
 
@@ -130,13 +210,6 @@ css命名的语义化是指：为html标签添加有意义的class，id补充未
 
 
 
-
-
-
-
-
-
-
 <br />
 ## CSS部分
 
@@ -177,15 +250,6 @@ Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默�
 ![display转换规则](http://qiu-deqing.github.io/image/display-adjust.png)
 
 
-
-
-
-
-
-
-
-
-
 <br />
 
 - **外边距折叠（collapsing margins）**  
@@ -196,7 +260,7 @@ Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默�
 4.元素自身的margin-bottom和margin-top相邻时也会折叠
 
 
-<br /><br />
+<br />
 
 - **如何确定一个元素的包含块（containing block）**
     - 根元素的包含块叫做初始包含块，在连续媒体中他的尺寸与viewport相同并且anchored at the canvas origin；对于paged media，它的尺寸等于page area。初始包含块的direction属性与根元素相同。
@@ -372,7 +436,7 @@ z轴上的默认层叠顺序如下（从下到上）：
     - **flexbox**居中
 
 
-<br /><br /><br /><br /><br /><br />
+<br />
 
 ## javascript部分
 - **javascript有哪几种方法定义函数？**
@@ -384,7 +448,7 @@ z轴上的默认层叠顺序如下（从下到上）：
 
 重要参考资料：[MDN:Functions_and_function_scope](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope)
 
-<br /><br /><br /><br /><br /><br /><br /><br />
+<br />
 
 - **应用程序存储和离线web应用**  
 HTML5新增应用程序缓存，允许web应用将应用程序自身保存到用户浏览器中，用户离线状态也能访问。  
@@ -429,10 +493,6 @@ localStorage.clear();  // remove all data
 </pre>
 
 
-
-
-
-
 <br />
 
 - **cookie及其操作**  
@@ -460,8 +520,6 @@ document.cookie = 'name=aaa; path=/; domain=domain; secure';
 [cookieUtil.js](https://github.com/qiu-deqing/google/blob/master/module/js/cookieUtil.js)：自己写的cookie操作工具
 
 
-
-
 <br />
 
 - **javascript有哪些方法定义对象**
@@ -481,7 +539,7 @@ document.cookie = 'name=aaa; path=/; domain=domain; secure';
     6. 如果他们都是字符串并且在相同位置包含相同的16位值，他它们相等；如果在长度或者内容上不等，它们不相等；两个字符串显示结果相同但是编码不同==和===都认为他们不相等
     7. 如果他们指向相同对象、数组、函数，它们相等；如果指向不同对象，他们不相等
 
-<br /><br /><br /><br />
+<br />
 
 - **==运算符判断相等的流程是怎样的**
 
@@ -502,14 +560,14 @@ document.cookie = 'name=aaa; path=/; domain=domain; secure';
     2. 如果对象没有toString()方法或者返回值不是原始值，javascript寻找对象的valueOf()方法，如果存在就调用它，返回结果是原始值则转为字符串作为结果
     3. 否则，javascript不能从toString()或者valueOf()获得一个原始值，此时throws a TypeError
 
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br />
 
 -  **对象到数字的转换步骤**
     1. 如果对象有valueOf()方法并且返回元素值，javascript将返回值转换为数字作为结果
     2. 否则，如果对象有toString()并且返回原始值，javascript将返回结果转换为数字作为结果
     3. 否则，throws a TypeError
 
-<br /><br /><br /><br />
+<br />
 
 - **&lt;,&gt;,&lt;=,&gt;=的比较规则**  
 所有比较运算符都支持任意类型，但是**比较只支持数字和字符串**，所以需要执行必要的转换然后进行比较，转换规则如下:
@@ -518,7 +576,7 @@ document.cookie = 'name=aaa; path=/; domain=domain; secure';
     3. 否则，如果有一个操作数不是字符串，**将两个操作数转换为数字**进行比较
 
 
-<br /><br /><br />
+<br />
 
 - **+运算符工作流程**
     1. 如果有操作数是对象，转换为原始值
@@ -601,12 +659,13 @@ var EventUtil = {
 
 - **评价一下三种方法实现继承的优缺点**
 
-
 <pre>
-function Person()
+function Shape() {}
+
+function
 </pre>
 
-<br /><br /><br /><br />
+<br />
 
 - **完成一个函数，接受数组作为参数，数组元素为整数或者数组，数组元素包含整数或数组，函数返回扁平化后的数组**  
 如：[1, [2, [ [3, 4], 5], 6]] => [1, 2, 3, 4, 5, 6]
