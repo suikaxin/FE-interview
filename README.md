@@ -256,6 +256,8 @@ Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默�
 2.不被浮动元素覆盖  
 3.阻止父子元素的margin折叠
 
+<br />
+ 
 
 - **display, float, position的关系**  
 1.如果``display``为none，那么position和float都不起作用，这种情况下元素不产生框  
