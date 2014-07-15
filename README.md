@@ -677,13 +677,28 @@ var EventUtil = {
 </pre>
 
 
-- **评价一下三种方法实现继承的优缺点**
+- **评价一下三种方法实现继承的优缺点，并改进**
 
 <pre>
 function Shape() {}
 
-function
+function Rect() {}
+
+// 方法1
+Rect.prototype = new Shape();
+
+// 方法2
+Rect.prototype = Shape.prototype;
+
+// 方法3
+Rect.prototype = Object.create(Shape.prototype);
+
+Rect.prototype.area = function () {
+  // do something
+};
 </pre>
+
+1.方法1缺点：创建父类
 
 <br />
 
@@ -760,7 +775,7 @@ else if (document.all) {
 缺点：  
 1. document.all作为IE检测不可靠，应该使用if(el.attachEvent)  
 2. addListener在不同浏览器下API不一样  
-3. ``listener.apply``使this与标准一致但监听器无法移除
+3. ``listener.apply``使this与标准一致但监听器无法移除  
 4. 未解决IE下listener参数event。 target问题
 
 改进
