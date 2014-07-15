@@ -786,6 +786,7 @@ var addListener;
 if (window.addEventListener) {
   addListener = function (el, type, listener, useCapture) {
     el.addEventListener(type, listener, useCapture);
+    return listener;
   };
 }
 else if (window.attachEvent) {
