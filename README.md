@@ -245,6 +245,14 @@ Content-Type: text/html; charset=iso-8859-1
 
 3.IE6不支持PNG透明背景，解决办法: **IE6下使用gif图片**
 
+4.IE6-7不支持``display: inline-block``解决办法：设置inline并触发hasLayout
+
+<pre>
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+</pre>
+
 
 <br />
 
