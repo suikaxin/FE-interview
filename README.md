@@ -253,8 +253,28 @@ Content-Type: text/html; charset=iso-8859-1
     *zoom: 1;
 </pre>
 
+5.IE6下浮动元素在浮动方向上的外边距会加倍。解决办法：  
+1）使用padding控制间距。  
+2）浮动元素``display: inline;``这样解决问题且无任何副作用：css标准规定浮动元素display:inline会自动调整为block
+
 
 <br />
+
+- **容器包含若干浮动元素时如何清理浮动**  
+1.容器元素闭合标签前添加额外元素并设置``clear: both``  
+2.设置容器元素伪元素进行清理  
+
+<pre>
+.container::after {
+    content: "";
+    display: block;
+    line-height: 0;
+    clear: both;
+}
+</pre>
+
+3.父元素触发块级格式化上下文  
+4.IE6下需触发hasLayout
 
 - **什么是FOUC？如何避免？**  
 Flash Of Unstyled Content：用户定义样式表加载之前浏览器使用默认样式显示文档，用户样式加载渲染之后再从新显示文档，造成页面闪烁。**解决方法**：把样式表放到文档的`head` 
