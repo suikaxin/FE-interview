@@ -242,7 +242,7 @@ Content-Type: text/html; charset=iso-8859-1
 2.不会在元素前后进行换行  
 3.受``white-space``控制  
 4.``margin/padding``在竖直方向上无效，水平方向上有效  
-5.``width/height``属性无效  
+5.``width/height``属性对非替换行内元素无效  
 6.浮动或绝对定位时会转换为``block``  
 7.``vertical-align``属性生效  
 
