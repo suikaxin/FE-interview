@@ -257,7 +257,8 @@ Content-Type: text/html; charset=iso-8859-1
 2.不会在元素前后进行换行  
 3.受``white-space``控制  
 4.``margin/padding``在竖直方向上无效，水平方向上有效  
-5.``width/height``属性无效，宽度由元素内容决定  
+5.``width/height``属性对非替换行内元素无效，宽度由元素内容决定  
+6.非替换行内元素的行框高由``line-height``确定，替换行内元素的行框高由``height``,``margin``,``padding``,``border``决定  
 6.浮动或绝对定位时会转换为``block``  
 7.``vertical-align``属性生效  
 
